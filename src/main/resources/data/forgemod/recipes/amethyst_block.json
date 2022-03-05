@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "AAA",
+    "AAA",
+    "AAA"
+  ],
+  "key": {
+    "A": {
+      "item": "forgemod:amethyst"
+    }
+  },
+  "result": {
+    "item": "forgemod:amethyst_block"
+  }
+}

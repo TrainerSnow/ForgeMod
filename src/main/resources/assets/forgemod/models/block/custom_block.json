@@ -1,0 +1,11 @@
+{
+  "parent": "block/cube",
+  "textures": {
+    "north": "forgemod:block/side_one",
+    "south" : "forgemod:block/side_two",
+    "east": "forgemod:block/side_three",
+    "west": "forgemod:block/side_four",
+    "up": "forgemod:block/side_five",
+    "down": "forgemod:block/side_six"
+  }
+}

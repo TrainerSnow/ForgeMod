@@ -1,0 +1,10 @@
+{
+  "item.forgemod.amethyst": "Amethyst",
+  "block.forgemod.amethyst_ore" : "Amethyst Ore",
+  "block.forgemod.amethyst_block": "Block of Amethyst",
+  "block.forgemod.custom_block": "Gem Transmutator",
+  "item.forgemod.food_helmet": "Food Helmet",
+  "item.forgemod.food_chestplate": "Food Chestplate",
+  "item.forgemod.food_leggings": "Food Leggings",
+  "item.forgemod.food_boots": "Food Boots"
+}

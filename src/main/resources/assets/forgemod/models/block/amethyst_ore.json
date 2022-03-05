@@ -1,0 +1,6 @@
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "forgemod:block/amethyst_ore"
+  }
+}

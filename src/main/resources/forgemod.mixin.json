@@ -1,0 +1,11 @@
+{
+  "required": true,
+  "package": "com.snow.forgemod.mixin",
+  "compatibilityLevel": "JAVA_8",
+  "client": [
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "refmap": "forgemod.mixin-refmap.json"
+}

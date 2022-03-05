@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "forgemod:block/custom_block"
+    }
+  }
+}
