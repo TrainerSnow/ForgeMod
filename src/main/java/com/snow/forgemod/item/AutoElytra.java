@@ -2,6 +2,8 @@ package com.snow.forgemod.item;
 
 import com.snow.forgemod.util.Strings;
 import com.snow.forgemod.util.Util;
+import com.sun.jna.platform.unix.X11;
+import javafx.stage.Screen;
 import net.minecraft.client.renderer.entity.layers.ElytraLayer;
 import net.minecraft.client.renderer.entity.model.ElytraModel;
 import net.minecraft.client.util.ITooltipFlag;
@@ -29,17 +31,18 @@ public class AutoElytra extends ArmorItem {
     @Override
     public ActionResult<ItemStack> use(World worldIn, PlayerEntity playerIn, Hand handIn) {
         ItemStack heldItemStack = playerIn.inventory.getSelected();
-        if(heldItemStack.getItem().equals(this)){
-            int itemSlot = Util.findSlotFromItem(playerIn, Items.FIREWORK_ROCKET);
-            if( itemSlot != -1){
-                playerIn.inventory.removeItem(itemSlot, 1);
-                Util.sendMessageToPlayer(playerIn, "Eine Rakete verbraucht!", worldIn);
-                if(heldItemStack.hasTag()){
-                    setCharge(heldItemStack, getCharge(heldItemStack) + 1);
-                }else {
-                    setCharge(heldItemStack, 0);
+        if (!worldIn.isClientSide){
+            if (heldItemStack.getItem().equals(this)) {
+                int itemSlot = Util.findSlotFromItem(playerIn, Items.FIREWORK_ROCKET);
+                if (itemSlot != -1) {
+                    playerIn.inventory.removeItem(itemSlot, 1);
+                    if (heldItemStack.hasTag()) {
+                        setCharge(heldItemStack, getCharge(heldItemStack) + 1);
+                    } else {
+                        setCharge(heldItemStack, 0);
+                    }
+                    return ActionResult.success(heldItemStack);
                 }
-                return ActionResult.success(heldItemStack);
             }
         }
         return ActionResult.fail(heldItemStack);
@@ -52,12 +55,12 @@ public class AutoElytra extends ArmorItem {
 
     @Override
     public boolean canElytraFly(ItemStack stack, LivingEntity entity) {
-        return stack.getDamageValue() < stack.getMaxDamage();
+        return true;
     }
 
     @Override
     public boolean elytraFlightTick(ItemStack stack, LivingEntity entity, int flightTicks) {
-        return canElytraFly(stack, entity);
+        return true;
     }
 
 

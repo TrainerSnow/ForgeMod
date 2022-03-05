@@ -1,16 +1,10 @@
 package com.snow.forgemod.event.listeners;
 
-import com.snow.forgemod.item.AutoElytra;
-import com.snow.forgemod.util.Strings;
 import com.snow.forgemod.util.Util;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.FireworkRocketEntity;
-import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.world.World;
-import net.minecraftforge.client.event.RenderWorldLastEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -25,14 +19,10 @@ public class EventHandler{
     public static void rightClickEmpty(PlayerInteractEvent.RightClickEmpty event){
         PlayerEntity player = event.getPlayer();
         World world = event.getWorld();
-        player.sendMessage(new StringTextComponent("Event fired"), net.minecraft.util.Util.NIL_UUID);
-        if(Util.playerWearsAutoElytra(player)){
-            player.sendMessage(new StringTextComponent("1"), net.minecraft.util.Util.NIL_UUID);
-            if (player.isFallFlying()) {
-                player.sendMessage(new StringTextComponent("2"), net.minecraft.util.Util.NIL_UUID);
-                world.addFreshEntity(new FireworkRocketEntity(world, player.inventory.items.get(0), player));
+        FireworkRocketEntity fw;
+        if(Util.playerWearsAutoElytra(player) && player.isFallFlying() && !world.isClientSide)
+             fw = new FireworkRocketEntity(world, Items.FIREWORK_ROCKET.getDefaultInstance(), player);
 
-            }
-        }
     }
 }
+
