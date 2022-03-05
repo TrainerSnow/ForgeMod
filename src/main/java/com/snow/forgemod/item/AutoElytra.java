@@ -27,32 +27,32 @@ public class AutoElytra extends ArmorItem {
     }
 
     @Override
-    public ActionResult<ItemStack> onItemRightClick(World worldIn, PlayerEntity playerIn, Hand handIn) {
-        ItemStack heldItemStack = playerIn.inventory.getCurrentItem();
+    public ActionResult<ItemStack> use(World worldIn, PlayerEntity playerIn, Hand handIn) {
+        ItemStack heldItemStack = playerIn.inventory.getSelected();
         if(heldItemStack.getItem().equals(this)){
             int itemSlot = Util.findSlotFromItem(playerIn, Items.FIREWORK_ROCKET);
             if( itemSlot != -1){
-                playerIn.inventory.decrStackSize(itemSlot, 1);
+                playerIn.inventory.removeItem(itemSlot, 1);
                 Util.sendMessageToPlayer(playerIn, "Eine Rakete verbraucht!", worldIn);
                 if(heldItemStack.hasTag()){
                     setCharge(heldItemStack, getCharge(heldItemStack) + 1);
                 }else {
                     setCharge(heldItemStack, 0);
                 }
-                return ActionResult.resultSuccess(heldItemStack);
+                return ActionResult.success(heldItemStack);
             }
         }
-        return ActionResult.resultFail(heldItemStack);
+        return ActionResult.fail(heldItemStack);
     }
 
     @Override
-    public void addInformation(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
+    public void appendHoverText(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
         tooltip.add(new StringTextComponent("Charge: " + getCharge(stack) ));
     }
 
     @Override
     public boolean canElytraFly(ItemStack stack, LivingEntity entity) {
-        return stack.getDamage() < stack.getMaxDamage();
+        return stack.getDamageValue() < stack.getMaxDamage();
     }
 
     @Override

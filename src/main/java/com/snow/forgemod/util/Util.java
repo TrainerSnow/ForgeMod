@@ -16,9 +16,9 @@ import java.util.Random;
 public class Util {
 
     public static void sendMessageToPlayer(PlayerEntity player, String message, World world){
-        if(world.isRemote()){
+        if(world.isClientSide){
             ITextComponent tC = new StringTextComponent(message);
-            player.sendStatusMessage(tC, true);
+            player.displayClientMessage(tC, true);
         }
     }
 
@@ -33,15 +33,15 @@ public class Util {
 
     public static boolean playerHasFullFoodArmor(PlayerEntity player){
         return
-                player.inventory.armorInventory.get(3).getItem().equals(ModItems.FOOD_HELMET.get()) &&
-                        player.inventory.armorInventory.get(2).getItem().equals(ModItems.FOOD_CHESTPLATE.get()) &&
-                        player.inventory.armorInventory.get(1).getItem().equals(ModItems.FOOD_LEGGINGS.get()) &&
-                        player.inventory.armorInventory.get(0).getItem().equals(ModItems.FOOD_BOOTS.get());
+                player.inventory.armor.get(3).getItem().equals(ModItems.FOOD_HELMET.get()) &&
+                        player.inventory.armor.get(2).getItem().equals(ModItems.FOOD_CHESTPLATE.get()) &&
+                        player.inventory.armor.get(1).getItem().equals(ModItems.FOOD_LEGGINGS.get()) &&
+                        player.inventory.armor.get(0).getItem().equals(ModItems.FOOD_BOOTS.get());
     }
 
     public static int findSlotFromItem(PlayerEntity player, Item item){
-        for(int i = 0; i < player.inventory.mainInventory.size(); i++){
-            if(player.inventory.mainInventory.get(i).getItem().equals(item)){
+        for(int i = 0; i < player.inventory.items.size(); i++){
+            if(player.inventory.items.get(i).getItem().equals(item)){
                 return i;
             }
         }
@@ -49,6 +49,6 @@ public class Util {
     }
 
     public static boolean playerWearsAutoElytra(PlayerEntity player){
-        return player.inventory.armorInventory.get(2).getItem() instanceof AutoElytra;
+        return player.inventory.armor.get(2).getItem() instanceof AutoElytra;
     }
 }

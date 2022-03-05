@@ -25,12 +25,12 @@ public class EventHandler{
     public static void rightClickEmpty(PlayerInteractEvent.RightClickEmpty event){
         PlayerEntity player = event.getPlayer();
         World world = event.getWorld();
-        player.sendMessage(new StringTextComponent("Event fired"), net.minecraft.util.Util.DUMMY_UUID);
+        player.sendMessage(new StringTextComponent("Event fired"), net.minecraft.util.Util.NIL_UUID);
         if(Util.playerWearsAutoElytra(player)){
-            player.sendMessage(new StringTextComponent("1"), net.minecraft.util.Util.DUMMY_UUID);
-            if (player.isElytraFlying()) {
-                player.sendMessage(new StringTextComponent("2"), net.minecraft.util.Util.DUMMY_UUID);
-                world.addEntity(new FireworkRocketEntity(world, player.inventory.mainInventory.get(0), player));
+            player.sendMessage(new StringTextComponent("1"), net.minecraft.util.Util.NIL_UUID);
+            if (player.isFallFlying()) {
+                player.sendMessage(new StringTextComponent("2"), net.minecraft.util.Util.NIL_UUID);
+                world.addFreshEntity(new FireworkRocketEntity(world, player.inventory.items.get(0), player));
 
             }
         }

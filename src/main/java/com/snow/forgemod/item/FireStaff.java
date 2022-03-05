@@ -19,19 +19,19 @@ public class FireStaff extends BowItem {
     }
 
     @Override
-    public void onPlayerStoppedUsing(ItemStack stack, World worldIn, LivingEntity entityLiving, int timeLeft) {
+    public void releaseUsing(ItemStack stack, World worldIn, LivingEntity entityLiving, int timeLeft) {
         if (entityLiving instanceof PlayerEntity) {
             PlayerEntity player = (PlayerEntity) entityLiving;
-            Vector3d vector3d = player.getLook(1.0F);
-            double d2 = -(player.getPosX() - (player.getPosX() + vector3d.x * 4.0D));
-            double d3 = -(player.getPosYHeight(1.0F) - (player.getPosYHeight(0)));
-            double d4 = -(player.getPosZ() - (player.getPosZ() + vector3d.z * 4.0D));
-            worldIn.playEvent(null, 1016, player.getPosition(), 0);
+            Vector3d vector3d = player.getViewVector(1.0F);
+            double d2 = -(player.getX() - (player.getX() + vector3d.x * 4.0D));
+            double d3 = -(player.getY(1.0F) - (player.getY(0)));
+            double d4 = -(player.getZ() - (player.getZ() + vector3d.z * 4.0D));
+            worldIn.levelEvent(null, 1016, player.blockPosition(), 0);
 
             FireballEntity fireballentity = new FireballEntity(worldIn, player, d2, d3, d4);
             fireballentity.explosionPower = 1;
-            fireballentity.setPosition(player.getPosX() + vector3d.x * 4.0D, player.getPosYHeight(0.5D) + 0.5D, fireballentity.getPosZ() + vector3d.z * 4.0D);
-            worldIn.addEntity(fireballentity);
+            fireballentity.setPos(player.getX() + vector3d.x * 4.0D, player.getY(0.5D) + 0.5D, fireballentity.getZ() + vector3d.z * 4.0D);
+            worldIn.addFreshEntity(fireballentity);
         }
     }
 }

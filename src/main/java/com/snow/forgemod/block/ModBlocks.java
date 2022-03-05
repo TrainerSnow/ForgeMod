@@ -20,21 +20,6 @@ public class ModBlocks {
 
     public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, ForgeMod.MOD_ID);
 
-    public static final RegistryObject<Block> AMETHYST_ORE = registerBlock("amethyst_ore",
-            () -> new Block(AbstractBlock.Properties.create(Material.ROCK).harvestLevel(3).harvestTool(ToolType.PICKAXE)));
-
-    public static final RegistryObject<Block> AMETHYST_BLOCK = registerBlock("amethyst_block",
-            () -> new Block(AbstractBlock.Properties.create(Material.ROCK).harvestLevel(4).harvestTool(ToolType.HOE)));
-
-    public static final RegistryObject<Block> CUSTOM_BLOCK = registerBlock("custom_block",
-            () -> new CustomBlock(AbstractBlock.Properties.create(Material.ROCK).harvestLevel(4).harvestTool(ToolType.AXE)));
-
-    public static final RegistryObject<Block> POOP_BLOCK = registerBlock("poop_block",
-            () -> new PoopBlock(AbstractBlock.Properties.create(Material.ROCK).harvestLevel(4).harvestTool(ToolType.SHOVEL)));
-
-    public static final RegistryObject<Block> POOP_CRAFTER_BLOCK = registerBlock("poop_crafter_block",
-            () -> new PoopCrafterBlock(AbstractBlock.Properties.create(Material.ROCK).harvestLevel(4).harvestTool(ToolType.PICKAXE)));
-
     public static void register(IEventBus eventBus){
         BLOCKS.register(eventBus);
     }
@@ -46,7 +31,7 @@ public class ModBlocks {
     }
 
     private static <T extends Block> void registerBlockItem(String name, RegistryObject<T> block){
-        ModItems.ITEMS.register(name, () -> new BlockItem(block.get(), new Item.Properties().group(ItemGroup.MISC)));
+        ModItems.ITEMS.register(name, () -> new BlockItem(block.get(), new Item.Properties().tab(ItemGroup.TAB_MISC)));
     }
 
 

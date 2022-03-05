@@ -14,8 +14,8 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import java.util.function.Supplier;
 
 public enum ModArmorMaterial implements IArmorMaterial {
-    FOOD("food", 29, new int[]{3, 5, 7, 2}, 15, SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 1.5F, 0.1F, () -> {
-        return Ingredient.fromItems(Items.DIAMOND);
+    FOOD("food", 29, new int[]{3, 5, 7, 2}, 15, SoundEvents.ARMOR_EQUIP_DIAMOND, 1.5F, 0.1F, () -> {
+        return Ingredient.of(Items.DIAMOND);
     })
     ;
 
@@ -57,7 +57,32 @@ public enum ModArmorMaterial implements IArmorMaterial {
     }
 
     public Ingredient getRepairMaterial() {
-        return this.repairMaterial.getValue();
+        return this.repairMaterial.get();
+    }
+
+    @Override
+    public int getDurabilityForSlot(EquipmentSlotType pSlot) {
+        return 0;
+    }
+
+    @Override
+    public int getDefenseForSlot(EquipmentSlotType pSlot) {
+        return 0;
+    }
+
+    @Override
+    public int getEnchantmentValue() {
+        return 0;
+    }
+
+    @Override
+    public SoundEvent getEquipSound() {
+        return null;
+    }
+
+    @Override
+    public Ingredient getRepairIngredient() {
+        return null;
     }
 
     @OnlyIn(Dist.CLIENT)

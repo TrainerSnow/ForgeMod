@@ -39,7 +39,6 @@ public class ForgeMod {
         ModItems.register(eventBus);
         ModBlocks.register(eventBus);
 
-
         eventBus.addListener(this::setup);
         eventBus.addListener(this::enqueueIMC);
         eventBus.addListener(this::processIMC);

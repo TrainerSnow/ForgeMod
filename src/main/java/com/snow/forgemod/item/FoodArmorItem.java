@@ -25,7 +25,7 @@ public class FoodArmorItem extends ArmorItem {
 
         if(iteration == 20){
             iteration = 0;
-            if(Util.playerHasFullFoodArmor(player) && player.getFoodStats().getFoodLevel() < 15){
+            if(Util.playerHasFullFoodArmor(player) && player.getFoodData().getFoodLevel() < 15){
                 Util.sendMessageToPlayer(player, "GUT GEMACHT", world);
 
                 consumeFoodItem(player, world);
@@ -39,12 +39,12 @@ public class FoodArmorItem extends ArmorItem {
     }
 
     private void consumeFoodItem(PlayerEntity player, World world) {
-        for(int i = 0; i < player.inventory.mainInventory.size(); i++){
-            Item item = player.inventory.mainInventory.get(i).getItem();
-            if(item.isFood()){
-                player.onFoodEaten(world, new ItemStack(item));
-                player.inventory.decrStackSize(i, 1);
-                player.sendMessage(new StringTextComponent("You just ate one " + item.getName().getString()), net.minecraft.util.Util.DUMMY_UUID);
+        for(int i = 0; i < player.inventory.items.size(); i++){
+            Item item = player.inventory.items.get(i).getItem();
+            if(item.isEdible()){
+                player.eat(world, new ItemStack(item));
+                player.inventory.removeItem(i, 1);
+                player.sendMessage(new StringTextComponent("You just ate one " + item.getName(new ItemStack(item)).getString()), net.minecraft.util.Util.NIL_UUID);
 
             }
         }
